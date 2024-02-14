@@ -22,7 +22,7 @@ namespace _1ERParcialPRG3.Controllers
 
 		public ActionResult Contact()
 		{
-			ViewBag.Message = "Your contact page.";
+			ViewBag.Message = "ITLA location";
 
 			return View();
 		}

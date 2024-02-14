@@ -16,12 +16,15 @@ warning 6002: The table/view 'dbmvcp3.dbo.mDepartamento' does not have a primary
           <Property Name="Activo" Type="int" />
         </EntityType>
         <EntityContainer Name="dbmvcp3ModelStoreContainer">
-          <EntitySet Name="mDepartamento" EntityType="Self.mDepartamento" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [mDepartamento].[IdDepto] AS [IdDepto], 
-    [mDepartamento].[DeptoNombre] AS [DeptoNombre], 
-    [mDepartamento].[Activo] AS [Activo]
-    FROM [dbo].[mDepartamento] AS [mDepartamento]</DefiningQuery>
+          <EntitySet Name="mDepartamento" EntityType="Self.mDepartamento" store:Type="Tables" Schema="dbo">
+            
+			  
+			  
+			  
+			  
+			  
+			  
+			  
           </EntitySet>
         </EntityContainer>
       </Schema>

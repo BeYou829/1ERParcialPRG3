@@ -151,6 +151,7 @@
     <Compile Include="Models\mDepartamento.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TableViewModel\DeptTableViewModel.cs" />
     <Compile Include="Models\TableViewModel\mDeptTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -223,6 +224,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Department\Query.cshtml" />
+    <Content Include="Views\Department\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

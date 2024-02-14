@@ -9,7 +9,7 @@ namespace _1ERParcialPRG3.Controllers
 {
     public class DepartmentController : Controller
     {
-        // GET: Departament
+        // GET: Department
         public ActionResult Query()
         {
             List<mDeptTableViewModel> listDept = null;
@@ -28,5 +28,35 @@ namespace _1ERParcialPRG3.Controllers
             };
                 return View(listDept);
         }
-    }
+        public ActionResult New()
+        {
+            return View();
+        }
+        [HttpPost]
+		public ActionResult New(DeptTableViewModel model)
+		{
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using(dbmvcp3Entities db = new dbmvcp3Entities())
+                    {
+                        var oDept = new mDepartamento();
+                        oDept.DeptoNombre = model._DeptName;
+                        oDept.Activo = model._ActualStatus;
+
+                        db.mDepartamentoes.Add(oDept);
+                        db.SaveChanges();
+                    }
+					return Redirect("/");
+				}
+                return View(model);
+			}
+            
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+		}
+	}
 }
