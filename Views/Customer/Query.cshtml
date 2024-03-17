@@ -1,0 +1,62 @@
+﻿@model List<_1ERParcialPRG3.Models.TableViewModel.CustomerTableViewModel>
+@{
+    ViewBag.Title = "Consulta de clientes";
+}
+<div class="d-flex justify-content-center">
+    <h2>
+        Clientes
+    </h2>
+</div>
+<div class="row">
+    <a href="~/Customer/New" class="btn btn-primary" style="width:auto; text-align:right; margin:0px 0px 5px 12px; padding:4px 14px">Nuevo</a>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-hover">
+            <tr id="first-tr" style="background-color: #023877; color:white">
+                <th>
+                    Customer ID
+                </th>
+                <th>
+                    Nombre de la compañia
+                </th>
+                <th>
+                    Dirección
+                </th>
+                <th>
+                    Ciudad
+                </th>
+                <th>
+                    Region
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+            @foreach (var oElement in Model)
+            {
+                <tr>
+                    <td>
+                        @oElement._CustomerID
+                    </td>
+                    <td>
+                        @oElement._CompanyName
+                    </td>
+                    <td>
+                        @oElement._Address
+                    </td>
+                    <td>
+                        @oElement._City
+                    </td>
+                    <td>
+                        @oElement._Region
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" href="~/Customer/Edit/@oElement._CustomerID">Edit</a>
+                        <a class="btn btn-danger" href="~/Customer/Delete/@oElement._CustomerID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

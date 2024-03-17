@@ -1,0 +1,33 @@
+﻿@model _1ERParcialPRG3.Models.TableViewModel.DeptTableViewModel
+@{
+    ViewBag.Title = "Edit Department";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Department", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor( d => d._Id )
+            <div>
+                @Html.LabelFor(d => d._DeptName)
+                <br />
+                @Html.TextBoxFor(d => d._DeptName, "", new { @class = "form control" })
+                <br />
+                @Html.ValidationMessageFor(d => d._DeptName, null, new { @class = "danger" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d._ActualStatus)
+                <br />
+                @Html.TextBoxFor(d => d._ActualStatus, "", new { @class = "form control" })
+                <br />
+                @Html.ValidationMessageFor(d => d._ActualStatus, null, new { @class = "danger" })
+            </div>
+        </div>
+        <div style="text-align: right;">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+}
+

@@ -48,7 +48,7 @@ namespace _1ERParcialPRG3.Controllers
                         db.mDepartamentoes.Add(oDept);
                         db.SaveChanges();
                     }
-					return Redirect("/");
+					return Redirect("/Department/Query");
 				}
                 return View(model);
 			}
@@ -57,6 +57,56 @@ namespace _1ERParcialPRG3.Controllers
             {
                 throw new Exception(ex.Message);
             }
+		}
+
+		public ActionResult Edit( int Id )
+		{
+            DeptTableViewModel model = new DeptTableViewModel();
+            using (dbmvcp3Entities db = new dbmvcp3Entities())
+            {
+                var oDept = db.mDepartamentoes.Find(Id);
+                model._DeptName = oDept.DeptoNombre;
+                model._ActualStatus = oDept.Activo;
+                model._Id = oDept.IdDepto;
+            }
+			return View(model);
+		}
+		[HttpPost]
+		public ActionResult Edit(DeptTableViewModel model)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					using (dbmvcp3Entities db = new dbmvcp3Entities())
+					{
+						var oDept = db.mDepartamentoes.Find(model._Id);
+						oDept.DeptoNombre = model._DeptName;
+						oDept.Activo = model._ActualStatus;
+
+						db.Entry(oDept).State = System.Data.Entity.EntityState.Modified;
+						db.SaveChanges();
+					}
+					return Redirect("/Department/Query");
+				}
+				return View(model);
+			}
+
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+		public ActionResult Delete(int Id)
+		{
+			DeptTableViewModel model = new DeptTableViewModel();
+			using (dbmvcp3Entities db = new dbmvcp3Entities())
+			{
+				var oDept = db.mDepartamentoes.Find(Id);
+                db.mDepartamentoes.Remove(oDept);
+                db.SaveChanges();
+			}
+			return Redirect("/Department/Query");
 		}
 	}
 }

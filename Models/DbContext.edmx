@@ -4,9 +4,58 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbmvcp3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbmvcp3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
-warning 6002: The table/view 'dbmvcp3.dbo.mDepartamento' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'dbmvcp3.dbo.Customers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="CustomerID" Type="nvarchar" MaxLength="5" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ContactTitle" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar" MaxLength="60" />
+          <Property Name="City" Type="nvarchar" MaxLength="15" />
+          <Property Name="Region" Type="nvarchar" MaxLength="15" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="15" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="24" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbmvcp3.dbo.Invoices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ShipName" Type="nvarchar" MaxLength="40" />
+          <Property Name="ShipAddress" Type="nvarchar" MaxLength="60" />
+          <Property Name="ShipCity" Type="nvarchar" MaxLength="15" />
+          <Property Name="ShipRegion" Type="nvarchar" MaxLength="15" />
+          <Property Name="ShipPostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="ShipCountry" Type="nvarchar" MaxLength="15" />
+          <Property Name="CustomerID" Type="nvarchar" MaxLength="5" />
+          <Property Name="Customers.CompanyName" Type="nvarchar" MaxLength="40" />
+          <Property Name="Address" Type="nvarchar" MaxLength="60" />
+          <Property Name="City" Type="nvarchar" MaxLength="15" />
+          <Property Name="Region" Type="nvarchar" MaxLength="15" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="15" />
+          <Property Name="Salesperson" Type="nvarchar" MaxLength="255" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="RequiredDate" Type="datetime" />
+          <Property Name="ShippedDate" Type="datetime" />
+          <Property Name="Shippers.CompanyName" Type="nvarchar" MaxLength="40" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="40" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="Quantity" Type="smallint" />
+          <Property Name="Discount" Type="real" />
+          <Property Name="ExtendedPrice" Type="money" />
+          <Property Name="Freight" Type="money" />
+        </EntityType>
         <EntityType Name="mDepartamento">
           <Key>
             <PropertyRef Name="IdDepto" />
@@ -15,20 +64,127 @@ warning 6002: The table/view 'dbmvcp3.dbo.mDepartamento' does not have a primary
           <Property Name="DeptoNombre" Type="nvarchar" MaxLength="50" />
           <Property Name="Activo" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbmvcp3.dbo.Orders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="nvarchar" MaxLength="5" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="RequiredDate" Type="datetime" />
+          <Property Name="ShippedDate" Type="datetime" />
+          <Property Name="ShipVia" Type="int" />
+          <Property Name="Freight" Type="money" />
+          <Property Name="ShipName" Type="nvarchar" MaxLength="40" />
+          <Property Name="ShipAddress" Type="nvarchar" MaxLength="60" />
+          <Property Name="ShipCity" Type="nvarchar" MaxLength="15" />
+          <Property Name="ShipRegion" Type="nvarchar" MaxLength="15" />
+          <Property Name="ShipPostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="ShipCountry" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbmvcp3.dbo.Products' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Discontinued" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="QuantityPerUnit" Type="nvarchar" MaxLength="20" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="UnitsInStock" Type="smallint" />
+          <Property Name="UnitsOnOrder" Type="smallint" />
+          <Property Name="ReorderLevel" Type="smallint" />
+          <Property Name="Discontinued" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="dbmvcp3ModelStoreContainer">
-          <EntitySet Name="mDepartamento" EntityType="Self.mDepartamento" store:Type="Tables" Schema="dbo">
-            
-			  
-			  
-			  
-			  
-			  
-			  
-			  
+          <EntitySet Name="mDepartamento" EntityType="Self.mDepartamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customers].[CustomerID] AS [CustomerID], 
+    [Customers].[CompanyName] AS [CompanyName], 
+    [Customers].[ContactName] AS [ContactName], 
+    [Customers].[ContactTitle] AS [ContactTitle], 
+    [Customers].[Address] AS [Address], 
+    [Customers].[City] AS [City], 
+    [Customers].[Region] AS [Region], 
+    [Customers].[PostalCode] AS [PostalCode], 
+    [Customers].[Country] AS [Country], 
+    [Customers].[Phone] AS [Phone], 
+    [Customers].[Fax] AS [Fax]
+    FROM [dbo].[Customers] AS [Customers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Invoices].[ShipName] AS [ShipName], 
+    [Invoices].[ShipAddress] AS [ShipAddress], 
+    [Invoices].[ShipCity] AS [ShipCity], 
+    [Invoices].[ShipRegion] AS [ShipRegion], 
+    [Invoices].[ShipPostalCode] AS [ShipPostalCode], 
+    [Invoices].[ShipCountry] AS [ShipCountry], 
+    [Invoices].[CustomerID] AS [CustomerID], 
+    [Invoices].[Customers.CompanyName] AS [Customers.CompanyName], 
+    [Invoices].[Address] AS [Address], 
+    [Invoices].[City] AS [City], 
+    [Invoices].[Region] AS [Region], 
+    [Invoices].[PostalCode] AS [PostalCode], 
+    [Invoices].[Country] AS [Country], 
+    [Invoices].[Salesperson] AS [Salesperson], 
+    [Invoices].[OrderID] AS [OrderID], 
+    [Invoices].[OrderDate] AS [OrderDate], 
+    [Invoices].[RequiredDate] AS [RequiredDate], 
+    [Invoices].[ShippedDate] AS [ShippedDate], 
+    [Invoices].[Shippers.CompanyName] AS [Shippers.CompanyName], 
+    [Invoices].[ProductID] AS [ProductID], 
+    [Invoices].[ProductName] AS [ProductName], 
+    [Invoices].[UnitPrice] AS [UnitPrice], 
+    [Invoices].[Quantity] AS [Quantity], 
+    [Invoices].[Discount] AS [Discount], 
+    [Invoices].[ExtendedPrice] AS [ExtendedPrice], 
+    [Invoices].[Freight] AS [Freight]
+    FROM [dbo].[Invoices] AS [Invoices]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Orders" EntityType="Self.Orders" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Orders].[OrderID] AS [OrderID], 
+    [Orders].[CustomerID] AS [CustomerID], 
+    [Orders].[EmployeeID] AS [EmployeeID], 
+    [Orders].[OrderDate] AS [OrderDate], 
+    [Orders].[RequiredDate] AS [RequiredDate], 
+    [Orders].[ShippedDate] AS [ShippedDate], 
+    [Orders].[ShipVia] AS [ShipVia], 
+    [Orders].[Freight] AS [Freight], 
+    [Orders].[ShipName] AS [ShipName], 
+    [Orders].[ShipAddress] AS [ShipAddress], 
+    [Orders].[ShipCity] AS [ShipCity], 
+    [Orders].[ShipRegion] AS [ShipRegion], 
+    [Orders].[ShipPostalCode] AS [ShipPostalCode], 
+    [Orders].[ShipCountry] AS [ShipCountry]
+    FROM [dbo].[Orders] AS [Orders]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Products" EntityType="Self.Products" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Products].[ProductID] AS [ProductID], 
+    [Products].[ProductName] AS [ProductName], 
+    [Products].[SupplierID] AS [SupplierID], 
+    [Products].[CategoryID] AS [CategoryID], 
+    [Products].[QuantityPerUnit] AS [QuantityPerUnit], 
+    [Products].[UnitPrice] AS [UnitPrice], 
+    [Products].[UnitsInStock] AS [UnitsInStock], 
+    [Products].[UnitsOnOrder] AS [UnitsOnOrder], 
+    [Products].[ReorderLevel] AS [ReorderLevel], 
+    [Products].[Discontinued] AS [Discontinued]
+    FROM [dbo].[Products] AS [Products]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbmvcp3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -42,7 +198,94 @@ warning 6002: The table/view 'dbmvcp3.dbo.mDepartamento' does not have a primary
         </EntityType>
         <EntityContainer Name="dbmvcp3Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="mDepartamentoes" EntityType="Self.mDepartamento" />
+          <EntitySet Name="Customers" EntityType="dbmvcp3Model.Customer" />
+          <EntitySet Name="Invoices" EntityType="dbmvcp3Model.Invoice" />
+          <EntitySet Name="Orders" EntityType="dbmvcp3Model.Order" />
+          <EntitySet Name="Products" EntityType="dbmvcp3Model.Product" />
         </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ShipName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ShipAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCity" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Customers_CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Salesperson" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="ShippedDate" Type="DateTime" Precision="3" />
+          <Property Name="Shippers_CompanyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int16" />
+          <Property Name="Discount" Type="Single" />
+          <Property Name="ExtendedPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="ShippedDate" Type="DateTime" Precision="3" />
+          <Property Name="ShipVia" Type="Int32" />
+          <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ShipName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ShipAddress" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCity" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ShipRegion" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ShipPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ShipCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Discontinued" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="QuantityPerUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UnitsInStock" Type="Int16" />
+          <Property Name="UnitsOnOrder" Type="Int16" />
+          <Property Name="ReorderLevel" Type="Int16" />
+          <Property Name="Discontinued" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -55,6 +298,91 @@ warning 6002: The table/view 'dbmvcp3.dbo.mDepartamento' does not have a primary
                 <ScalarProperty Name="IdDepto" ColumnName="IdDepto" />
                 <ScalarProperty Name="DeptoNombre" ColumnName="DeptoNombre" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="dbmvcp3Model.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="dbmvcp3Model.Invoice">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="ExtendedPrice" ColumnName="ExtendedPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Shippers_CompanyName" ColumnName="Shippers.CompanyName" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Salesperson" ColumnName="Salesperson" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Customers_CompanyName" ColumnName="Customers.CompanyName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="dbmvcp3Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="dbmvcp3Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

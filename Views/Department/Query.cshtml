@@ -21,6 +21,9 @@
                 <th>
                     Estatus
                 </th>
+                <th>
+                    Opciones
+                </th>
             </tr>
             @foreach(var oElement in Model)
             {
@@ -33,6 +36,10 @@
                     </td>
                     <td>
                         @oElement._ActualStatus
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" href="~/Department/Edit/@oElement._Id">Edit</a>
+                        <a class="btn btn-danger" href="~/Department/Delete/@oElement._Id">Delete</a>
                     </td>
                 </tr>
             }

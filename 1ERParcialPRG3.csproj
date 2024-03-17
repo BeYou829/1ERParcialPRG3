@@ -128,10 +128,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbContext.Context.cs">
       <AutoGen>True</AutoGen>
@@ -148,11 +152,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Invoice.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mDepartamento.cs">
       <DependentUpon>DbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>DbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TableViewModel\CustomerTableViewModel.cs" />
     <Compile Include="Models\TableViewModel\DeptTableViewModel.cs" />
     <Compile Include="Models\TableViewModel\mDeptTableViewModel.cs" />
+    <Compile Include="Models\TableViewModel\OrderTableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +240,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Department\Query.cshtml" />
     <Content Include="Views\Department\New.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Customer\Query.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
